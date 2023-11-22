@@ -5,7 +5,7 @@
       "name": "BlobTrigger",
       "type": "blobTrigger",
       "direction": "in",
-      "path": "kbarticle",
+      "path": "kbarticles",
       "connection": "STORAGECONNECTIONSTRING"
     }
   ]

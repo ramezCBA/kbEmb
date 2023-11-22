@@ -9,15 +9,15 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 def main(BlobTrigger: func.InputStream):
-    logging.info(f"Python blob trigger function processed blob\n"
-                 f"Name: {BlobTrigger.name}\n"
-                 f"Blob Size: {BlobTrigger.length} bytes")
-
-    filename = BlobTrigger.name.split('/')[-1]  # Get File name when the blob is added
-    blob_path = filename
-    logging.info(f"Processing file: {filename}")
-
     try:
+        logging.info(f"Python blob trigger function processed blob \n"
+                     f"Name: {BlobTrigger.name}\n"
+                     f"Blob Size: {BlobTrigger.length} bytes")
+
+        filename = BlobTrigger.name.split('/')[-1]  # Get File name when the blob is added
+        blob_path = filename
+        logging.info(f"Processing file: {filename}")
+
         stream = BlobService.read_stream_from_blob(blob_path)
         html_content = stream.read().decode('utf-8')  # Read and decode HTML content
         logging.info("Successfully read and decoded HTML content")
@@ -64,5 +64,5 @@ def main(BlobTrigger: func.InputStream):
         logging.info("Loaded document to search index")
 
     except Exception as e:
-        logging.error(f"Error occurred: {str(e)}")
-        raise
+        logging.error("An error occurred during processing.")
+        logging.error(f"Error: {str(e)}")
